@@ -2,7 +2,16 @@
  * Sumber tunggal fakta brand. Isi HANYA dengan data yang benar.
  * Nilai kosong otomatis tidak dikeluarkan di schema (lihat schema.ts).
  */
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, "");
+const getSiteUrl = () => {
+  const envUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  if (envUrl && envUrl.startsWith("http")) {
+    return envUrl.replace(/\/$/, "");
+  }
+  // Fallback aman agar tidak pernah menghasilkan Invalid URL saat build
+  return "https://geekwithmak.com";
+};
+
+const siteUrl = getSiteUrl();
 
 export const site = {
   name: "PEDANG88",
@@ -21,7 +30,7 @@ export const site = {
   legalName: null as string | null, // nama badan usaha, jika sudah ada
   slogan: null as string | null,
   logo: { path: "/images/1-logo-pedang88.webp", width: 600, height: 120 },
-  ogImage: { path: "/images/pedang88-about-us.webp", width: 1200, height: 630 }, // atau buat gambar khusus banner og.png
+  ogImage: { path: "/images/pedang88-about-us.webp", width: 1200, height: 630 },
   email: null as string | null,
   telephone: null as string | null, // format internasional, contoh: "+62-8xx-xxxx-xxxx"
   whatsapp: null as string | null, // hanya angka, format internasional tanpa +, contoh: "628123456789"
