@@ -26,8 +26,18 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
+// Fungsi pengaman agar metadataBase tidak pernah menyebabkan Invalid URL saat build di Vercel
+const getMetadataBase = () => {
+  try {
+    if (site.url && site.url.startsWith("http")) {
+      return new URL(site.url);
+    }
+  } catch {}
+  return new URL("https://geekwithmak.com");
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: getMetadataBase(),
   title: { default: site.homeTitle, template: `%s | ${site.name}` },
   description: site.description,
   applicationName: site.name,
