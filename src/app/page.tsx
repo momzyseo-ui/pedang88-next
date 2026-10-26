@@ -37,11 +37,10 @@ export default function Home() {
     <>
       <JsonLd
         data={graph([
-          webPageNode("/", {
-            name: site.homeTitle,
-            description: site.description,
-            breadcrumb: true,
-            faqs: [
+            webPageNode("/", {
+              name: site.homeTitle,
+              description: site.description,
+              faqs: [
               {
                 question: `Apa itu ${site.name}?`,
                 answer: `${site.name} adalah brand pusat informasi dan jalur pemesanan resmi top up game ${site.games.join(", ")}. Seluruh pesanan dan pembayaran diproses langsung di toko resmi kami secara aman.`,
